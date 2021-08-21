@@ -26,7 +26,8 @@ function processJSON(response) {
         temp : response.main.temp,
         minTemp : response.main.temp_min,
         maxTemp : response.main.temp_max,
-        location : response.name
+        location : response.name,
+        icon_code: response.weather[0].code
     };
     
     return data;
@@ -45,8 +46,6 @@ function displayWeather(data) {
     weather.appendChild(temperature);
 
 }
-
-
 
 getWeatherData('Australia');
 
