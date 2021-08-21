@@ -27,7 +27,7 @@ function processJSON(response) {
         minTemp : response.main.temp_min,
         maxTemp : response.main.temp_max,
         location : response.name,
-        icon_code: response.weather[0].code
+        icon_code: response.weather[0].icon
     };
     
     return data;
@@ -40,11 +40,73 @@ function displayWeather(data) {
     let weatherDescription = document.createElement('p');
     weatherDescription.textContent = `${data.weatherDescription}`;
     let temperature = document.createElement('p');
-    temperature.textContent = `${data.temp}, min: ${data.minTemp}, max: ${data.maxTemp}`;
+    temperature.textContent = `${convertTempToC(data.temp)}, min: ${convertTempToC(data.minTemp)}, max: ${convertTempToC(data.maxTemp)}`;
+    let weather_icon = document.createElement('img');
+    weather_icon.src = `${getIcon(data.icon_code)}`;
+    weather_icon.classList.add('icon')
+
     weather.appendChild(location);
     weather.appendChild(weatherDescription);
     weather.appendChild(temperature);
+    weather.appendChild(weather_icon);
 
+}
+
+function convertTempToC(temp) {
+    //kelvin to c
+    //K = C + 273.15
+    //C = K - 273.15
+    return Math.round((temp - 273.15) * 100) / 100
+}
+
+function getIcon(icon_code) {
+    console.log(icon_code)
+    if (icon_code === '01d') {
+        //sunny
+        return `icons\wi-day-sunny.svg`;
+      }
+    
+      if (icon_code === '01n') {
+        //moon
+        return 'icons/moon.svg';
+      }
+      if (icon_code === '02d') {
+        //cloudy day
+        return `icons\wi-day-cloudy-high.svg`;
+
+      }
+      if (icon_code === '02n') {
+        //cloudy night
+        return `icons\wi-night-alt-cloudy-high.svg`;
+
+      }
+      if (icon_code === '03d' || icon_code === '03n') {
+        //cloud
+        return `icons\wi-cloud.svg`;
+
+      }
+      if (icon_code === '04d' || icon_code === '04n') {
+        //cloudy
+        return `icons\wi-cloudy.svg`;
+
+      }
+      if (icon_code === '09d' || icon_code === '09n' || icon_code === '10d' || icon_code === '10n') {
+        //rainy
+        return `icons\wi-rain.svg`;
+
+      }
+      if (icon_code === '11d' || icon_code === '11n') {
+        //lightning
+        return `icons\wi-lightning.svg`;
+
+      }
+      if (icon_code === '13d' || icon_code === '13n') {
+        //snow
+        return `icons\wi-snow.svg`;
+
+      }
+
+      return '';
 }
 
 getWeatherData('Australia');
