@@ -59,6 +59,20 @@ img {
     /* width: 80%; */
 }
 
+.weatherCard {
+    background-image: linear-gradient(to right, lightgray, lightgray);
+    opacity: 0.9;
+    height: var(--weather_card_height);
+    width: var(--weather_card_width);
+    max-width: 80%;
+    max-height: 80%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 .weather_info_icon {
     height: 30px;
     width: 30px;
@@ -93,6 +107,7 @@ img {
     /* border: 1px solid black; */
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-top: 15px;
 }
 
@@ -106,20 +121,21 @@ img {
     align-items: center;
 }
 
-.weatherCard {
-    background-image: linear-gradient(to right, lightgray, lightgray);
-    opacity: 0.9;
-    height: var(--weather_card_height);
-    width: var(--weather_card_width);
-    max-width: 80%;
-    max-height: 80%;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    justify-content: space-evenly;
-    align-items: center;
+@media screen and (max-width: 400px) {
+    .tempInfo,
+    .searchBox {
+        flex-direction: column;
+    }
 }
 
+@media screen and (max-height: 400px) {
+    .weatherCard {
+        flex-direction: row;
+        background-color: pink;
+    }
+}
+
+/* toggle slider */
 .toggle {
     position: relative;
     padding: 5px;

@@ -17,7 +17,6 @@ async function getWeatherData(location) {
     );
     if (weatherData.status === 400 || weatherData.status === 404) {
         alert('city/country not found');
-        // console.log('city/country not found');
     } else {
         weatherData.json().then(function(response) {
             console.log(response);
@@ -81,7 +80,7 @@ function createLocationDOM(location) {
 
 function createWeatherDescriptionDOM(weatherDescription,unix) {
     let weatherDescriptionDOM = document.createElement('p');
-    weatherDescriptionDOM.textContent = `${weatherDescription}, ${unixToDate(unix)}`;
+    weatherDescriptionDOM.textContent = `${weatherDescription}, loaded at: ${unixToDate(unix)}`;
 
     return weatherDescriptionDOM;
 }
@@ -94,7 +93,8 @@ function createWeatherInformationDOM(temp,humidity,wind_speed) {
     tempDIV.classList.add('tempDIV');
     humidity_wind_speedDIV.classList.add('humidity_wind_speedDIV');
     let tempDOM = document.createElement('p');
-    tempDOM.textContent = temp;
+    tempDOM.textContent = `${temp}°C`;
+    tempDOM.setAttribute("value",temp);
     let humidityDOM = document.createElement('p');
     humidityDOM.textContent = humidity;
     let wind_speedDOM = document.createElement('p');
@@ -126,21 +126,21 @@ function createIconDOM(icon_code) {
     weather_icon_DOM.classList.add('icon')
     return weather_icon_DOM
 }
-
+// °
 function convertTemp(bool) {
-    let temp = weather.getElementsByClassName('tempDIV');
-    let actual_temp = temp[0].textContent;
+    let temp = weather.querySelector('.tempDIV p');
+    let actual_temp = temp.getAttribute("value");
     //if checked,convert to f
     if (bool) {
         actual_temp = actual_temp*9/5+32
-        temp[0].textContent = Math.round((actual_temp * 100)) / 100
+        temp.setAttribute("value",actual_temp);
+        temp.textContent = `${Math.round((actual_temp * 100)) / 100}°F`
     }
     else {
         actual_temp = (actual_temp-32)*5/9
-        temp[0].textContent = Math.round((actual_temp* 100)) / 100
+        temp.setAttribute("value",actual_temp);
+        temp.textContent = `${Math.round((actual_temp* 100)) / 100}°C`
     }
-    console.log(actual_temp);
-    // return Math.round((temp - 273.15) * 100) / 100
 }
 
 function unixToDate(unix) {
@@ -156,7 +156,6 @@ function unixToDate(unix) {
 }
 
 function getIcon(icon_code) {
-    console.log(icon_code)
     if (icon_code === '01d') {
         //sunny
         return `./assets/sunnyday.svg`;
@@ -213,7 +212,6 @@ searchButton.addEventListener('click', function(e) {
 function getSearchValue(e) {
     e.preventDefault();
     let str = document.getElementById('location').value;
-    console.log(str);
     getWeatherData(str);
 }
 
