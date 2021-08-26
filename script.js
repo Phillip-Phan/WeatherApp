@@ -101,11 +101,11 @@ function createWeatherInformationDOM(temp,humidity,wind_speed) {
     wind_speedDOM.textContent = wind_speed;
 
     let humidityICON = document.createElement('img');
-    humidityICON.src = 'assets/humidity.svg'
+    humidityICON.src = './assets/humidity.svg'
     humidityICON.classList.add('weather_info_icon')
     
     let wind_speedICON = document.createElement('img');
-    wind_speedICON.src = 'assets/windy.svg'
+    wind_speedICON.src = './assets/windy.svg'
     wind_speedICON.classList.add('weather_info_icon')
 
     tempDIV.appendChild(tempDOM);
@@ -173,32 +173,32 @@ function getIcon(icon_code) {
       }
       if (icon_code === '02n') {
         //cloudy night
-        return `/assets/cloudynight.svg`;
+        return `./assets/cloudynight.svg`;
 
       }
       if (icon_code === '03d' || icon_code === '03n') {
         //cloud
-        return `/assets/cloud.svg`;
+        return `./assets/cloud.svg`;
 
       }
       if (icon_code === '04d' || icon_code === '04n') {
         //cloudy
-        return `/assets/cloudy.svg`;
+        return `./assets/cloudy.svg`;
 
       }
       if (icon_code === '09d' || icon_code === '09n' || icon_code === '10d' || icon_code === '10n') {
         //rainy
-        return `/assets/rain.svg`;
+        return `./assets/rain.svg`;
 
       }
       if (icon_code === '11d' || icon_code === '11n') {
         //lightning
-        return `/assets/lightning.svg`;
+        return `./assets/lightning.svg`;
 
       }
       if (icon_code === '13d' || icon_code === '13n') {
         //snow
-        return `/assets/snow.svg`;
+        return `./assets/snow.svg`;
 
       }
 
